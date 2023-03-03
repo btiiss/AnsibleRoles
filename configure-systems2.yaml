@@ -13,11 +13,11 @@
    #- motd
     name: httpd
     state: latest
--name: run httpd
+- name: run httpd
   service:
     name: httpd
     state: started
--name: create content
+- name: create content
   copy:
     content: "congrats"
     dest: /var/www/html/index.html
