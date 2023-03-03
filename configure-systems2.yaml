@@ -6,18 +6,18 @@
   tasks:
 
 - name: install httpd
-  yum:
+   yum:
    #- hostname
    #- firewalld
    #- ntp-config
    #- motd
-    name: httpd
-    state: latest
+     name: httpd
+     state: latest
 - name: run httpd
-  service:
-    name: httpd
-    state: started
+   service:
+     name: httpd
+     state: started
 - name: create content
-  copy:
-    content: "congrats"
-    dest: /var/www/html/index.html
+   copy:
+     content: "congrats"
+     dest: /var/www/html/index.html
