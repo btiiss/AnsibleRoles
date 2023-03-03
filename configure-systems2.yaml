@@ -1,23 +1,8 @@
-# Playbook to call multiple roles to configure systems
-- name: Configure systems
-  hosts: 10.72.128.27
-  become: yes
+---
+- name: Hello World!
+  hosts: all
 
   tasks:
 
-- name: install httpd
-   yum :
-   #- hostname
-   #- firewalld
-   #- ntp-config
-   #- motd
-     name: httpd
-     state: latest
-- name: run httpd
-   service:
-     name: httpd
-     state: started
-- name: create content
-   copy:
-     content: "congrats"
-     dest: /var/www/html/index.html
+  - name: Hello World!
+    shell: echo "Hi! Tower is working!"
