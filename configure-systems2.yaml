@@ -6,7 +6,7 @@
   tasks:
 
 - name: install httpd
-   yum:
+   yum :
    #- hostname
    #- firewalld
    #- ntp-config
