@@ -5,10 +5,19 @@
 
   tasks:
 
-- name: Call Roles
-  hosts: 10.72.128.27
-  roles:
+- name: install httpd
+  yum:
    #- hostname
    #- firewalld
    #- ntp-config
-   - motd
+   #- motd
+    name: httpd
+    state: latest
+-name: run httpd
+  service:
+    name: httpd
+    state: started
+-name: create content
+  copy:
+    content: "congrats"
+    dest: /var/www/html/index.html
