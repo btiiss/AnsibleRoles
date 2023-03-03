@@ -6,3 +6,8 @@
 
   - name: Hello World!
     shell: echo "Hi! Tower is working!"
+    register: command_output
+
+  - name: Print command output
+    debug:
+      var: command_output.stdout_lines
