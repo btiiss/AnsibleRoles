@@ -2,8 +2,6 @@
 - name: check if all permissions needed are granted to the user orange
   hosts: all
   become: true
-- name: Check sudoers configuration
-  hosts: all
   gather_facts: false 
   vars:
     user: orange
