@@ -20,8 +20,9 @@
        var: result.stdout_lines
     - name: Check for command permission
       assert:
-       that: "'{{ commands }}' in result.stdout_lines"
-    - name: fail and when together
-      ansible.builtin.fail:
-       msg: "{{ user }} is not allowed to run {{ commands }} with sudo permission"
-      when: "'{{ commands }}' in commands and '{{ user }}' in users"
+        that: 
+          - "'(ALL) NOPASSWD: {{ item }}' in result.stdout_lines"
+          - "'({{ user }}) NOPASSWD: {{ item }}' in result.stdout_lines"
+        for_each: "{{ commands }}"
+      fail_msg: "{{ user }} is not allowed to run {{ item }} with sudo permission"
+      when: "'{{ item }}' in commands and '{{ user }}' in users"
