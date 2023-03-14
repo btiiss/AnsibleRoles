@@ -1,0 +1,27 @@
+---
+- name: check if all permissions needed are granted to the user orange
+  hosts: all
+  become: true
+- name: Check sudoers configuration
+  hosts: all
+  gather_facts: false 
+  vars:
+    user: orange
+    commands:
+      - /bin/ls
+      - /bin/ping
+      - /bin/cd
+      -	/usr/sbin/viduso
+ tasks:
+    - name: check sudoers
+      command: "sudo -l {{ user }}"
+      register: result
+      ignore_errors: yes 
+    - name: Print sudoers configuration
+      debug:
+        var: result.stdout_lines
+    - name: Check for command permission
+      assert:
+        that: "'({{ user }}) NOPASSWD: /usr/bin/{{ command }}' in result.stdout_lines"
+      fail_msg: "{{ user }} is not allowed to run {{ command }} with sudo permission"
+      when: "'{{ command }}' in commands and '{{ user }}' in users"
