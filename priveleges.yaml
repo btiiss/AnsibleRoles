@@ -20,6 +20,6 @@
         var: result.stdout_lines
     - name: Check for command permission
       assert:
-         that: "'({{ user }}) NOPASSWD: /usr/bin/{{ command }}' in result.stdout_lines"
+        that: "'({{ user }}) NOPASSWD: /usr/bin/{{ command }}' in result.stdout_lines"
       fail_msg: "{{ user }} is not allowed to run {{ command }} with sudo permission"
       when: "'{{ command }}' in commands and '{{ user }}' in users"
