@@ -1,7 +1,7 @@
 ---
 - name: check if all permissions needed are granted to the user orange
   hosts: 192.168.43.129
-  become: true
+  become: true
   gather_facts: false 
   vars:
     user: orange
