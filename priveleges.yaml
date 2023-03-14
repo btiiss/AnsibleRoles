@@ -6,10 +6,10 @@
   vars:
     user: orange
     commands:
-      - /bin/ls
-      - /bin/ping
-      - /bin/cd
-      -	/usr/sbin/viduso
+       - /bin/ls
+       - /bin/ping
+       - /bin/cd
+       -	/usr/sbin/viduso
   tasks:
     - name: check sudoers
       command: "sudo -l {{ user }}"
