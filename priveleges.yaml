@@ -24,5 +24,4 @@
           - "'(ALL) NOPASSWD: {{ item }}' in result.stdout_lines"
           - "'({{ user }}) NOPASSWD: {{ item }}' in result.stdout_lines"
         for_each: "{{ commands }}"
-      fail_msg: "{{ user }} is not allowed to run {{ item }} with sudo permission"
-      when: "'{{ item }}' in commands and '{{ user }}' in users"
+
