@@ -20,8 +20,9 @@
        var: result.stdout_lines
     - name: Check for command permission
       assert:
-        that: 
-          - "'(ALL) NOPASSWD: {{ item }}' in result.stdout_lines"
-          - "'({{ user }}) NOPASSWD: {{ item }}' in result.stdout_lines"
-        for_each: "{{ commands }}"
+        that:
+          - "'{{ commands }}' in result.stdout_lines"
+          - "'{{ user }}' in result.stdout_lines"
+        msg: "{{ user }} is not allowed to run {{ commands }} with sudo permission"
+      when: "'{{ commands }}' in commands and '{{ user }}' in users"
 
