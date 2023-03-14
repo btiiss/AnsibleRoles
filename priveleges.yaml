@@ -12,7 +12,7 @@
        - /usr/sbin/viduso
   tasks:
     - name: check sudoers
-      command: "sudo -l {{ user }}"
+      command: "sudo -l -U {{ user }}"
       register: result
       ignore_errors: yes 
     - name: Print sudoers configuration
