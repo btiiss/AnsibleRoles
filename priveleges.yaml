@@ -20,7 +20,7 @@
        var: result.stdout_lines
     - name: Check for command permission
       assert:
-       that: "'({{ user }}) {{ commands }}' in result.stdout_lines"
+       that: "'{{ commands }}' in result.stdout_lines"
     - name: fail and when together
       ansible.builtin.fail:
        msg: "{{ user }} is not allowed to run {{ commands }} with sudo permission"
