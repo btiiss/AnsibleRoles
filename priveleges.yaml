@@ -4,13 +4,13 @@
   become: true
   gather_facts: false 
   vars:
-    user: orange
-    commands:
+    user: orange
+    commands:
       - /bin/ls
       - /bin/ping
       - /bin/cd
       -	/usr/sbin/viduso
- tasks:
+  tasks:
     - name: check sudoers
       command: "sudo -l {{ user }}"
       register: result
