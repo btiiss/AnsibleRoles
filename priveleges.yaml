@@ -20,8 +20,8 @@
        var: result.stdout_lines
     - name: Check for command permission
       assert:
-       that: "'({{ user }}) NOPASSWD: /usr/bin/{{ command }}' in result.stdout_lines"
+       that: "'({{ user }}) NOPASSWD: /usr/bin/{{ commands }}' in result.stdout_lines"
     - name: fail and when together
       ansible.builtin.fail:
-       msg: "{{ user }} is not allowed to run {{ command }} with sudo permission"
-      when: "'{{ command }}' in commands and '{{ user }}' in users"
+       msg: "{{ user }} is not allowed to run {{ commands }} with sudo permission"
+      when: "'{{ commands }}' in commands and '{{ user }}' in users"
