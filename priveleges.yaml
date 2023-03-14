@@ -6,9 +6,9 @@
   vars:
     user: orange
     commands:
-      - /bin/ls
-      - /bin/ping
-      - /bin/cd
+      - /bin/ls
+      - /bin/ping
+      - /bin/cd
       -	/usr/sbin/viduso
   tasks:
     - name: check sudoers
