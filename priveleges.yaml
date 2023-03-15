@@ -15,7 +15,6 @@
     command: "{{ item }}"
     register: result
     loop: "{{ commands }}"
-    
     - name: Print results
       debug:
         var: result
