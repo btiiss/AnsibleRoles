@@ -12,8 +12,8 @@
     - name: Check if user can run commands
       assert:
         that:
-          - item.rc == 0
-          - "'orange' in item.stdout"
+        - item.rc == 0
+        - "'orange' in item.stdout"
         fail_msg: "User orange cannot run command '{{ item.item }}' with sudo"
       loop: "{{ commands }}"
       register: result
