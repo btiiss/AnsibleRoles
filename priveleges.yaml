@@ -21,10 +21,6 @@
     - name: Check for command permission
       assert:
         that:
-        - "' (ALL) NOPASSWD: {{ commands | join(\",\") }}' in result.stdout_lines"
-        - "'(ALL : ALL) NOPASSWD: ALL' in result.stdout_lines"
-        - "'{{ user }} ALL=(ALL) NOPASSWD: {{ commands | join(\",\") }}' in result.stdout_lines"
-        - "'{{ commands | join(\",\") }}' in result.stdout_lines"
-        - "'{{ user }}' in result.stdout_lines"
-        fail_msg: "'{{ user }}' is not allowed to run '{{ commands }}' with sudo permission"
+        - "' (ALL) NOPASSWD: {{ commands | join(\", \") }}' in result.stdout_lines"
+        fail_msg: "'(ALL) NOPASSWD: {{ commands | join(\", \") }}' is not in result.stdout_lines"  
       when: commands is defined
