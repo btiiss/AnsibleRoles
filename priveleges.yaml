@@ -1,26 +1,21 @@
 ---
-- name: check if all permissions needed are granted to the user orange
-  hosts: 192.168.43.114
-  become: true
-  gather_facts: false 
-  vars:
-    user: orange
-    commands:
-       - /bin/ls
-       - /bin/ping
-       - /bin/cd
-       - /usr/sbin/visudo
-  tasks:
-    - name: check sudoers
-      command: "sudo -l -U '{{ user }}'"
-      register: result
-      ignore_errors: yes 
-    - name: Print sudoers configuration
-      debug:
-       var: result.stdout_lines
-    - name: Check for command permission
-      assert:
-        that:
-        - "'    (ALL) NOPASSWD: {{ commands | join(\", \") }}' in result.stdout_lines"
-        fail_msg: "orange is not allowed to run '{{ commands }}' with sudo permission"
-      when: commands is defined
+- name: Check if user can run specific commands
+  hosts: all
+  become: true
+  vars:
+    commands:
+      - ls
+      - ping
+      - cd
+      - ll
+  tasks:
+    - name: Check if user can run commands
+      sudo:
+        user: or ange
+        command: "{{ item }}"
+      register: result
+      loop: "{{ commands }}"     
+    - name: Print results
+      debug:
+        var: result
+
