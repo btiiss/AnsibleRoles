@@ -1,4 +1,5 @@
 ---
+----
 - name: check if all permissions needed are granted to the user orange
   hosts: 192.168.43.114
   become: true
@@ -8,6 +9,7 @@
     commands:
        - /bin/ls
        - /bin/ping
+       - /bin/cd
        - /usr/sbin/viduso
   tasks:
     - name: check sudoers
@@ -20,6 +22,8 @@
     - name: Check for command permission
       assert:
         that:
+          - "'{{ user }}' in result.stdout_lines"
           - "'(ALL : ALL) NOPASSWD: ALL' in result.stdout_lines"
-          - "'orange ALL=(ALL) NOPASSWD: ALL' in result.stdout_lines"
-        fail_msg: "'orange' is not allowed to run any command with sudo permission"
+          - "'{{ user }} ALL=(ALL) NOPASSWD: {{ commands | join(\",\") }}' in result.stdout_lines"
+        fail_msg: "'{{ user }}' is not allowed to run '{{ commands }}' with sudo permission"
+      when: commands is defined
