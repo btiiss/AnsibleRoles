@@ -1,6 +1,6 @@
 ---
 - name: check if all permissions needed are granted to the user orange
-  hosts: 192.168.43.129
+  hosts: 192.168.43.114
   become: true
   gather_facts: false 
   vars:
@@ -24,5 +24,5 @@
           - "'{{ user }}' in result.stdout_lines"
           - "'(ALL : ALL) NOPASSWD: ALL' in result.stdout_lines"
           - "'{{ user }} ALL=(ALL) NOPASSWD: {{ commands | join(\",\") }}' in result.stdout_lines"
-          fail_msg: "'{{ user }}' is not allowed to run '{{ commands }}' with sudo permission"
+      fail_msg: "'{{ user }}' is not allowed to run '{{ commands }}' with sudo permission"
       when: commands is defined
