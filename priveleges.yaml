@@ -22,5 +22,5 @@
       assert:
         that:
         - "'    (ALL) NOPASSWD: {{ commands | join(\", \") }}' in result.stdout_lines"
-        fail_msg: "'    (ALL) NOPASSWD: {{ commands | join(\", \") }}' is not in result.stdout_lines"  
+        fail_msg: "'{{ user }}' is not allowed to run '{{ commands }}' with sudo permission"
       when: commands is defined
