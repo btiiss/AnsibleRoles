@@ -9,7 +9,7 @@
        - /bin/ls
        - /bin/ping
        - /bin/cd
-       - /usr/sbin/viduso
+       - /usr/sbin/visudo
   tasks:
     - name: check sudoers
       command: "sudo -l -U '{{ user }}'"
