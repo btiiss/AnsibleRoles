@@ -12,7 +12,7 @@
     - name: Check if user can run commands
       sudo:
         user: orange
-        command: "{{ item }}"
+        commands: "{{ item }}"
       register: result
       loop: "{{ commands }}"
 
