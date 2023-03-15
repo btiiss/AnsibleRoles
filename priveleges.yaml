@@ -10,14 +10,20 @@
 
   tasks:
     - name: Check if user can run commands
-      assert:
-        that:
-        - item.rc == 0
-        - "'orange' in item.stdout"
-        fail_msg: "User orange cannot run command '{{ item.item }}' with sudo"
+      command:
+        cmd: "sudo -l -U orange | grep 'NOPASSWD: {{ item }}'"
+        warn: no
+        ignore_errors: yes
       loop: "{{ commands }}"
       register: result
 
     - name: Print results
       debug:
         var: result
+
+    - name: Check results
+      assert:
+        that:
+          - "'not allowed to run' not in item.stderr"
+        fail_msg: "User orange cannot run command '{{ item.item }}' with sudo"
+      loop: "{{ result.results }}"
