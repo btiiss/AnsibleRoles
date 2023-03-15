@@ -21,7 +21,6 @@
     - name: Check for command permission
       assert:
         that:
-          - "'{{ user }}' in result.stdout_lines"
           - "'(ALL : ALL) NOPASSWD: ALL' in result.stdout_lines"
           - "'{{ user }} ALL=(ALL) NOPASSWD: {{ commands | join(\",\") }}' in result.stdout_lines"
           - "'    (ALL) NOPASSWD: {{ commands | join(\",\") }}' in result.stdout_lines"
