@@ -10,11 +10,13 @@
 
   tasks:
     - name: Check if user can run commands
-      sudo:
-        user: orange
-        commands: "{{ item }}"
-      register: result
+      assert:
+        that:
+          - item.rc == 0
+          - "'orange' in item.stdout"
+        fail_msg: "User orange cannot run command '{{ item.item }}' with sudo"
       loop: "{{ commands }}"
+      register: result
 
     - name: Print results
       debug:
