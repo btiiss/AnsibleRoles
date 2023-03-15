@@ -4,9 +4,9 @@
   become: true
   vars:
     commands:
-      - ls
-      - ping
-      - ll
+      - /bin/ls
+      - /bin/ping
+      - /bin/cd
 
   tasks:
     - name: Check if user can run commands
