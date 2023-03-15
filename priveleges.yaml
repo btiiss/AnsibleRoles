@@ -8,7 +8,6 @@
     commands:
        - /bin/ls
        - /bin/ping
-       - /bin/cd
        - /usr/sbin/viduso
   tasks:
     - name: check sudoers
