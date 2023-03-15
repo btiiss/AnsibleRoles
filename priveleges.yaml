@@ -20,12 +20,11 @@
        var: result.stdout_lines
     - name: Check for command permission
       assert:
-      that:
+        that:
           - "'(ALL : ALL) NOPASSWD: ALL' in result.stdout_lines"
           - "'{{ user }} ALL=(ALL) NOPASSWD: {{ commands | join(\",\") }}' in result.stdout_lines"
           - "'    (ALL) NOPASSWD: {{ commands | join(\",\") }}' in result.stdout_lines"
           - "'{{ commands | join(\",\") }}' in result.stdout_lines"
-
-          
-      fail_msg: "'{{ user }}' is not allowed to run '{{ commands }}' with sudo permission"
+          - "'{{ user }}' in result.stdout_lines"
+        fail_msg: "'{{ user }}' is not allowed to run '{{ commands }}' with sudo permission"
       when: commands is defined
