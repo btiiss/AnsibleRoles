@@ -1,20 +1,21 @@
 ---
 - name: Check if user can run specific commands
-  hosts: 192.168.43.114
-  become: true
-  vars:
-    commands:
-      - ls
-      - ping
-      - cd
-      - ll
-  tasks:
-    - name: Check if user can run commands
-      sudo:
-        user: or ange
-        command: "{{ item }}"
-      register: result
-      loop: "{{ commands }}"     
-    - name: Print results
-      debug:
-        var: result
+  hosts: 192.168.43.114
+  become: true
+  vars:
+  commands:
+     - ls
+     - ping
+     - cd
+     - ll
+  tasks:
+    - name: Check if user can run commands
+  sudo:
+    user: or ange
+    command: "{{ item }}"
+    register: result
+    loop: "{{ commands }}"
+    
+    - name: Print results
+      debug:
+        var: result
