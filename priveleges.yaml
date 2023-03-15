@@ -1,5 +1,4 @@
 ---
-----
 - name: check if all permissions needed are granted to the user orange
   hosts: 192.168.43.114
   become: true
