@@ -21,4 +21,4 @@
     - name: orange user can't run
       debug:
         msg: "orange user can't run {{ item }}"
-      when: "{{ item }} not in command_output.stdout"
+      when: "{{ item }} not in command_output.stdout"
