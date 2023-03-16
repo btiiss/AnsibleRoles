@@ -1,7 +1,8 @@
 ---
-- hosts: all
-  become: true
-  vars:
+-name : check
+  hosts: all
+  become: true
+  vars:
     commands:
       - ls
       - ping
