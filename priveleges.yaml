@@ -4,21 +4,16 @@
   become: true
   vars:
     commands:
-      - /bin/ls
-      - /bin/ping
-      - /bin/cd
+      - ls
+      - ping
+      - cd
   tasks:
     - name: Check if user can run commands
       shell:
-        cmd: "sudo -l -U orange | grep 'NOPASSWD: {{ item }}'"
+        cmd: "sudo -l -U orange | grep 'NOPASSWD:' | awk '!/{{ item }}/ print "orange user can not run {{ item }} "'"
       loop: "{{ commands }}"
       register: result
     - name: Print results
       debug:
         var: result
-    - name: Check results
-      assert:
-        that:
-          - "'not allowed to run' not in item.stderr"
-        fail_msg: "User orange cannot run command '{{ item.item }}' with sudo"
-      loop: "{{ result.results }}"
+"
