@@ -10,7 +10,7 @@
 
   tasks:
     - name: Check if user can run commands
-      command:
+      shell:
         cmd: "sudo -l -U orange | grep 'NOPASSWD: {{ item }}'"
         warn: no
         ignore_errors: yes
