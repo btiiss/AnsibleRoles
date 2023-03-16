@@ -11,8 +11,6 @@
     - name: Check if user can run commands
       shell:
         cmd: "sudo -l -U orange | grep 'NOPASSWD: {{ item }}'"
-        warn: no
-        ignore_errors: yes
       loop: "{{ commands }}"
       register: result
     - name: Print results
