@@ -7,7 +7,6 @@
       - /bin/ls
       - /bin/ping
       - /bin/cd
-
   tasks:
     - name: Check if user can run commands
       shell:
@@ -16,11 +15,9 @@
         ignore_errors: yes
       loop: "{{ commands }}"
       register: result
-
     - name: Print results
       debug:
         var: result
-
     - name: Check results
       assert:
         that:
