@@ -17,10 +17,10 @@
     - name: what orange user can run
       debug:
         msg: "Sorange user can run {{ item }}"
-      when: "{{ item }} in command_output.stdout"
+      when: item in command_output.stdout
       loop: "{{ commands }}"
     - name: orange user can't run
       debug:
         msg: "orange user can not run {{ item }}"
-      when: "{{ item }} not in command_output.stdout"
+      when: item not in command_output.stdout
       loop: "{{ commands }}"
