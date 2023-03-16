@@ -27,3 +27,4 @@
           debug:
             msg: "orange user can NOT run  {{ command }} "
           when: "'{{ command }}' not in command_output.stdout"
+
