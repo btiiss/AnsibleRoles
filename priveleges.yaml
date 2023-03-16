@@ -12,7 +12,7 @@
   tasks:
     - name: Run shell command and verify output
       shell: sudo -l -U orange
-      register: command_output
+      register : command_output
       ignore_errors: true
     - name: Check for each string in output
       loop: "{{ commands }}"
