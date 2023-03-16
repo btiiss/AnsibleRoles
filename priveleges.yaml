@@ -1,19 +1,24 @@
 ---
 - name: Check if user can run specific commands
-  hosts: 192.168.43.129
-  become: true
-  vars:
-    commands:
-      - ls
-      - cd
-      - ping
-      - ll
-      - cp
-  tasks:
-    - name: Check if user can run commands
-      shell: sudo -l -U orange | grep 'NOPASSWD:' | awk '!/{{ item }}/ {print "orange user can not run {{ item }}" }'
-      loop: "{{ commands }}"
-      register: result
-    - name: Print results
-      debug:
-        var: result.results|map(attribute='stdout')|select('match','^orange')|list
+  hosts: 192.168.43.129
+  become: true
+  vars:
+    commands:
+      - ls
+      - ping
+      - cd
+      - hadi
+      - wla hadi
+tasks:
+    - name: Run shell command and verify output
+      shell: sudo -l -U orange
+      register: command_output
+      ignore_errors: true
+    - name: what orange user can run
+      debug:
+        msg: "Sorange user can run {{ item }}"
+      when: "{{ item }} in command_output.stdout"
+    - name: orange user can't run
+      debug:
+        msg: "orange user can't run {{ item }}"
+      when: "{{ item }} not in command_output.stdout"
