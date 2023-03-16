@@ -16,4 +16,4 @@
       register: result
     - name: Print results
       debug:
-        var: result.stdout
+        var: result.results
