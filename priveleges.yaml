@@ -9,21 +9,21 @@
       - cd
       - hadi
       - wla hadi
-  tasks:
-    - name: Run shell command and verify output
-      shell:  sudo -l -U orange
-      register: command_output
-      ignore_errors: true
-    - name: Check for each string in output
-      loop: "{{ commands }}"
-      loop_control:
-        loop_var: command
-      block:
-        - name: Print message when command found
-          debug:
-            msg: "orange user can run {{ command }} "
-          when: "'{{ command }}' in command_output.stdout"
-        - name: Print message when command not found
-          debug:
-            msg: "orange user can NOT run  {{ command }} "
-          when: "'{{ command }}' not in command_output.stdout"
+  tasks:
+    - name: Run shell command and verify output
+      shell:  sudo -l -U orange
+      register: command_output
+      ignore_errors: true
+    - name: Check for each string in output
+      loop: "{{ commands }}"
+      loop_control:
+        loop_var: command
+      block:
+        - name: Print message when command found
+          debug:
+            msg: "orange user can run {{ command }} "
+          when: "'{{ command }}' in command_output.stdout"
+        - name: Print message when command not found
+          debug:
+            msg: "orange user can NOT run  {{ command }} "
+          when: "'{{ command }}' not in command_output.stdout"
