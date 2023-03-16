@@ -16,9 +16,9 @@
       ignore_errors: true
     - name: what orange user can run
       debug:
-        msg: "Sorange user can run {{ item }}"
+        msg: "Sorange user can run {{ item }}"
       when: "{{ item }} in command_output.stdout"
     - name: orange user can't run
       debug:
-        msg: "orange user can't run {{ item }}"
+        msg: "orange user can't run {{ item }}"
       when: "{{ item }} not in command_output.stdout"
