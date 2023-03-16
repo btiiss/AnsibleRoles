@@ -4,11 +4,11 @@
   become: true
   vars:
     commands:
-      - ls
-      - ping
-      - cd
-      - hadi
-      - wla hadi
+      - ls
+      - ping
+      - cd
+      - hadi
+      - wla hadi
   tasks:
     - name: Run shell command and verify output
       shell: sudo -l -U orange
