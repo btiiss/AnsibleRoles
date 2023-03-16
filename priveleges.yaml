@@ -15,10 +15,10 @@
       register: command_output
       ignore_errors: true
     - name: what orange user can run
-      debug:
+      debug:
         msg: "Sorange user can run {{ item }}"
       when: "{{ item }} in command_output.stdout"
     - name: orange user can't run
-      debug:
+      debug:
         msg: "orange user can't run {{ item }}"
       when: "{{ item }} not in command_output.stdout"
