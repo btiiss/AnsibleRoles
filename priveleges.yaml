@@ -5,8 +5,8 @@
   vars:
     commands:
       - ls
-      - ping
       - cd
+      - ping
       - ll
       - cp
   tasks:
