@@ -7,6 +7,8 @@
       - ls
       - ping
       - cd
+      - hadi
+      - wla hadi
   tasks:
     - name: Check if user can run commands
       shell: sudo -l -U orange | grep 'NOPASSWD:' | awk '!/{{ item }}/ {print "orange user can not run {{ item }}" }'
