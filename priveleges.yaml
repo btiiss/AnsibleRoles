@@ -16,4 +16,4 @@
       register: result
     - name: Print results
       debug:
-        var: result.results
+        var: result.results|map(attribute='stdout')|list 
