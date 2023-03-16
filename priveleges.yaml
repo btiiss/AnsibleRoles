@@ -10,7 +10,7 @@
   tasks:
     - name: Check if user can run commands
       shell:
-        cmd: "sudo -l -U orange | grep 'NOPASSWD:' | awk '!/{{ item }}/ print orange user can not run {{ item }} '"
+        cmd: "sudo -l -U orange | grep 'NOPASSWD:' | awk '!/{{ item }}/ {print 'orange user can not run {{ item }}' }'"
       loop: "{{ commands }}"
       register: result
     - name: Print results
