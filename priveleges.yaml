@@ -1,6 +1,6 @@
 ---
 -name : check
-  hosts: all
+  hosts : all
   become: true
   vars:
     commands:
