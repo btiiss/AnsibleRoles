@@ -1,6 +1,6 @@
 ---
 - name: Check if user can run specific commands
-  hosts: 192.168.43.129
+  hosts: all
   become: true
   vars:
     commands:
