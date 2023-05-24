@@ -6,7 +6,6 @@
     commands:
       - ls
       - ping
-      - cd
       - hadi
       - wla hadi
   tasks:
