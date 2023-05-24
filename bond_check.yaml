@@ -1,0 +1,39 @@
+- name: Vérifier la configuration du bond
+  hosts: all
+
+  tasks:
+    - name: Obtenir les informations du bond
+      command: cat /proc/net/bonding/bond0
+      register: bond_info
+
+    - name: Vérifier l'adresse MAC du bond
+      fail:
+        msg: "Erreur : Le bond ne possède pas une seule adresse MAC associée."
+      when:
+        - "'Slave Interface: ' in bond_info.stdout"
+        - "bond_info.stdout.count('Permanent HW addr:') != 1"
+
+    - name: Vérifier l'adresse IP du bond
+      fail:
+        msg: "Erreur : Le bond ne possède pas une seule adresse IP associée."
+      when:
+        - "'IP Address: ' in bond_info.stdout"
+        - "bond_info.stdout.count('IP Address:') != 1"
+
+    - name: Vérifier le paramètre 'active'
+      fail:
+        msg: "Erreur : Le paramètre 'active' n'est pas correctement configuré."
+      when:
+        - "'Currently Active Slave:' not in bond_info.stdout"
+        - "'Currently Active Slave: None' in bond_info.stdout"
+
+    - name: Vérifier le paramètre 'fast_rate'
+      fail:
+        msg: "Erreur : Le paramètre 'fast_rate' n'est pas correctement configuré."
+      when:
+        - "'MII Status: up' not in bond_info.stdout"
+        - "'Link Failure Count:' in bond_info.stdout
+
+    - name: Afficher un message de succès
+      debug:
+        msg: "La configuration du bond est correcte."
