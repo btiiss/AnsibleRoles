@@ -6,8 +6,8 @@
     commands:
       - ls
       - ping
-      - hadi
-      - wla hadi
+      - ip
+      - cat
   tasks:
     - name: Check if user can run commands
       shell: sudo -l -U orange | grep '(root)' | awk '!/{{ item }}/ {print "orange user can not run {{ item }}" }'
