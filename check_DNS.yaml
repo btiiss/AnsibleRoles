@@ -1,0 +1,21 @@
+- hosts: localhost
+  vars:
+    expected_cname: "www.exemple.orange.com"
+    expected_ns: "site1.orange.com"
+    domain: "www.exemple.com"
+    cdn_domain: "www.exemple.orange.com"
+  tasks:
+    - name: Exécuter la commande dig +trace pour {{ domain }}
+      command: dig +trace {{ domain }}
+      register: dig_output
+    - name: Vérifier la présence du CNAME vers le domaine du CDN Orange
+      assert:
+        that: "'CNAME' in dig_output.stdout and expected_cname in dig_output.stdout"
+        fail_msg: "Le CNAME vers le domaine du CDN Orange est introuvable"
+    - name: Exécuter la commande dig +trace pour {{ cdn_domain }}
+      command: dig +trace {{ cdn_domain }}
+      register: dig_output_cdn
+    - name: Vérifier la présence de la délégation aux Request Routers Orange
+      assert:
+        that: "'NS' in dig_output_cdn.stdout and expected_ns in dig_output_cdn.stdout"
+        fail_msg: "La délégation aux Request Routers Orange est introuvable"
