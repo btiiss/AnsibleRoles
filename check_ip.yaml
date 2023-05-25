@@ -13,9 +13,10 @@
       changed_when: false
     - name: Analyser les adresses IP
       set_fact:
-        ip_addresses: "{{ ip_output.stdout | regex_findall('inet [0-9],[0-9],[0-9],[0-9]') }}"
+        configured_ip_addresses: "{{ ip_output.stdout | regex_findall('inet [0-9],[0-9],[0-9],[0-9]') }}"
       changed_when: false
     - name: Vérifier les adresses IP configurées
       debug:
         msg: "L'adresse IP {{ item }} est correctement configurée."
       loop: "{{ ip_addresses }}"
+      when: item  in configured_ip_addresses
