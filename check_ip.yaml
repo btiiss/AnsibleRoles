@@ -3,9 +3,9 @@
   gather_facts: yes
   vars:
     ip_addresses:
-      - 192.168.56.104/5
-      - 192.168.43.129/4 
-      - 10.0.3.15/3
+      - 192.168.56.104
+      - 192.168.43.129 
+      - 10.0.3.15
   tasks:
     - name: Obtenir les informations sur les interfaces réseau
       command: ip a
