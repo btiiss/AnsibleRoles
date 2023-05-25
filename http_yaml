@@ -1,4 +1,6 @@
-- hosts: all
+---
+- name: Check if user can run specific commands
+  hosts: all
   vars:
     target_url: "http://www.exemple.com"
     expected_http_code: 200
