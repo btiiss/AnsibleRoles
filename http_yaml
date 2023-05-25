@@ -1,0 +1,23 @@
+- hosts: all
+  vars:
+    target_url: "http://www.exemple.com"
+    expected_http_code: 200
+    cache_ip: "192.168.1.100"  # Adresse IP du cache à tester
+  tasks:
+    - name: Exécuter la commande curl avec les options -v et --resolve en spécifiant le cache
+      command: curl -v --resolve www.exemple.com:80:{{ cache_ip }} {{ target_url }}
+      register: curl_output
+      changed_when: false
+
+    - name: Extraire le code HTTP de la réponse
+      set_fact:
+        http_code: "{{ curl_output.stdout_lines | regex_find('(HTTP/1.1 )([0-9]+)') | default([]) | last | split(' ')[1] }}"
+      
+    - name: Vérifier le code HTTP renvoyé
+      assert:
+        that: "http_code == expected_http_code"
+        fail_msg: "Le code HTTP renvoyé est différent de {{ expected_http_code }}. Vérifiez les logs du cache."
+
+    - name: Afficher le résultat de la requête
+      debug:
+        var: curl_output.stdout_lines
