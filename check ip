@@ -1,0 +1,24 @@
+- name: Vérifier la configuration des adresses IP
+  hosts: votre_hôte
+  gather_facts: yes
+  vars:
+    ip_addresses:
+      - 192.168.0.100/24
+      - 10.0.0.50/24
+      - 172.16.0.200/24
+  tasks:
+    - name: Obtenir les informations sur les interfaces réseau
+      command: ip addr show
+      register: ip_output
+      changed_when: false
+    - name: Analyser les adresses IP
+      set_fact:
+        configured_ip_addresses: "{{ ip_output.stdout | regex_findall('inet ([0-9.]+)/[0-9]+') }}"
+      changed_when: false
+    - name: Vérifier la configuration des adresses IP
+      debug:
+        msg: "L'adresse IP {{ item }} est incorrectement configurée sur l'interface {{ interface }}"
+      loop: "{{ ip_addresses }}"
+      vars:
+        interface: "{{ item.split('/')[1] }}"
+      when: item not in configured_ip_addresses
