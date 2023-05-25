@@ -13,7 +13,7 @@
       changed_when: false
     - name: Analyser les adresses IP
       set_fact:
-        configured_ip_addresses: "{{ ip_output.stdout | regex_findall('inet [0-9]{1,3}"\."[0-9]{1,3}"\."[0-9]{1,3}"\."[0-9]{1,3}\s') }}"
+        configured_ip_addresses: "{{ ip_output.stdout | regex_findall('inet [0-9],[0-9],[0-9],[0-9]{1,3}\s') }}"
       changed_when: false
     - name: Vérifier la configuration des adresses IP
       debug:
