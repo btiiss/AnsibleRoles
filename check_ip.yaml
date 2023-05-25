@@ -21,4 +21,4 @@
       loop: "{{ ip_addresses }}"
       vars:
         interface: "{{ item.split('/')[1] }}"
-      when: item not in configured_ip_addresses
+      when: item not in 'configured_ip_addresses}}
