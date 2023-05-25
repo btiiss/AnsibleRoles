@@ -1,4 +1,6 @@
-- hosts: localhost
+---
+- name: Check if user can run specific commands
+  hosts: all
   vars:
     expected_cname: "www.exemple.orange.com"
     expected_ns: "site1.orange.com"
