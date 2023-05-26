@@ -17,6 +17,6 @@
       changed_when: false
     - name: Vérifier les adresses IP configurées
       debug:
-        msg: "L'adresse IP {{ item }} est correctement configurée."
+        msg: "L'adresse IP {{ item }} n'est pas correctement configurée."
       loop: "{{ ip_addresses }}"
-      when: item  in configured_ip_addresses
+      when: item not in configured_ip_addresses
