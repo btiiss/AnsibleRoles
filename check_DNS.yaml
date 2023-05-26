@@ -1,5 +1,5 @@
 ---
-- name: Check if user can run specific commands
+- name: Check DNS configuration
   hosts: all
   vars:
     expected_cname: "www.exemple.orange.com"
