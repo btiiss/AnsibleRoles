@@ -10,14 +10,14 @@
     - name: Exécuter la commande dig +trace pour {{ domain }}
       command: dig +trace {{ domain }}
       register: dig_output
-    - name: Vérifier la présence du CNAME vers le domaine du CDN Orange
+    - name: Vérifier la présence du CNAME vers le DNS autoritaire sur domaine d'Orange
       assert:
         that: "'CNAME' in dig_output.stdout and expected_cname in dig_output.stdout"
-        fail_msg: "Le CNAME vers le domaine du CDN Orange est introuvable"
+        fail_msg: "Le CNAME vers le DNS autoritaire sur domaine d'Orange est introuvable"
     - name: Exécuter la commande dig +trace pour {{ orange_domain }}
       command: dig +trace {{ orange_domain }}
       register: dig_output_cdn
-    - name: Vérifier la présence de la délégation aux Request Routers Orange
+    - name: Vérifier la présence de la délégation aux Request Routers
       assert:
         that: "'NS' in dig_output_cdn.stdout and expected_ns in dig_output_cdn.stdout"
-        fail_msg: "La délégation aux Request Routers Orange est introuvable"
+        fail_msg: "La délégation aux Request Routers est introuvable"
