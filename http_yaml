@@ -1,5 +1,5 @@
 ---
-- name: Check if user can run specific commands
+- name: Check if cache work as prevu
   hosts: all
   vars:
     target_url: "http://www.exemple.com"
