@@ -15,6 +15,8 @@
       set_fact:
         configured_ip_addresses: "{{ ip_output.stdout | regex_findall('inet [0-9],[0-9],[0-9],[0-9]') }}"
       changed_when: false
+      debug:
+        msg: configured_ip_addresses
     - name: Vérifier les adresses IP configurées
       debug:
         msg: "L'adresse IP {{ item }} n'est pas correctement configurée."
